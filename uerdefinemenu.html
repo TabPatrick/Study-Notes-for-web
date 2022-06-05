@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+ 
+	<head>
+		<meta charset="UTF-8">
+		<title>鼠标右键事件</title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			.user_menu{
+                position: absolute;
+                width: 200px;
+                height: 400px;
+                border: 1px solid black;
+                border-radius: 15px;
+                display: none;
+                flex-direction: row;
+                align-items: center;
+                text-align: center;
+                line-height: 100px;
+                
+            }
+            .user_menu>ul>li{
+                border: 1px solid black;
+                width: 199px;
+                height: 100px;
+                list-style: none;
+                cursor: pointer;
+            }
+		</style>
+	</head>
+ 
+	<body>
+        <!-- 框：高窗口高度-菜单高度；宽窗口宽度-菜单宽度;或者判断鼠标位置如果超出某个范围则不生效 -->
+        <div style="width: 1520px;height:880px;" id="tar">
+            <menu id="menu" class="user_menu">
+                <ul>
+                    <li>选项1</li>
+                    <li>选项2</li>
+                    <li>选项3</li>
+                </ul>
+            </menu>
+        </div>
+		<script>
+            var el = document.getElementById("tar");
+            var oMenu = document.getElementById("menu");
+            window.onmousedown = function(event){
+                var btn = event.button;
+                if(btn == 0)
+                {
+                    oMenu.style.display = "none";
+				    oMenu.style.left = 0;
+					oMenu.style.top = 0;	 
+                }
+                if(btn == 2)
+                {
+                    el.oncontextmenu = function(e){
+                        e.preventDefault();
+						var _x = e.clientX,
+							_y = e.clientY;
+						oMenu.style.display = "flex";
+						oMenu.style.left = _x + "px";
+						oMenu.style.top = _y + "px";	
+                    }
+                }
+            }
+		</script>
+	</body>
+ 
+</html>
